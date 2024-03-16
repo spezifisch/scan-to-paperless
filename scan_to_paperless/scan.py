@@ -8,6 +8,7 @@ import os
 import re
 import subprocess  # nosec
 import sys
+from pathlib import Path
 from typing import Any, Optional, cast
 
 import argcomplete
@@ -250,6 +251,7 @@ def main() -> None:
                 "/master/scan_to_paperless/process_schema.json\n\n"
             )
             yaml.dump(process_config, process_file)
+        Path(root_folder).touch()
     else:
         os.rmdir(root_folder)
         os.rmdir(base_folder)
