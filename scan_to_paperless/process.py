@@ -1809,6 +1809,11 @@ def _process_code(name: str) -> None:
     if os.path.exists(destination_filename):
         return
 
+    if os.environ.get("SCAN_SKIP_CODES", "FALSE") == "TRUE":
+        _LOG.info("Skipping Code detection due to environment variable")
+        shutil.move(pdf_filename, destination_filename)
+        return
+
     try:
         _LOG.info("Processing codes for %s", pdf_filename)
         code.add_codes(
